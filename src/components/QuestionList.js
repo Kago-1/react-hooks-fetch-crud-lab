@@ -4,6 +4,7 @@ import QuestionItem from "./QuestionItem";
 
 function QuestionList() {
   const [query,setQueries] = useState([])
+  const[ques,setQues] = useState([])
 
 useEffect(()=>{
   fetch(`http://localhost:4000/questions`)
@@ -11,10 +12,17 @@ useEffect(()=>{
   .then((data) => {setQueries(data)}
 )},[])
 
+function deletQuiz (id){
+ const update = ques.filter((ques)=>ques.id !== id);
+  setQues(update)
+} 
+
 const Questions =( query.map((item)=>{
-  return <QuestionItem 
-  key={item.id} question={item}
+  return <div key={item.id}>
+     <QuestionItem 
+   question={item} deletQuiz={deletQuiz} 
   />
+  </div>
 }))
 
   return (
