@@ -1,6 +1,6 @@
 import React from "react";
 
-function QuestionItem({ question}) {
+function QuestionItem({question, deletQuiz}) {
   const { id, prompt, answers, correctIndex } = question;
 
   const options = answers.map((answer, index) => (
@@ -9,10 +9,11 @@ function QuestionItem({ question}) {
     </option>
   ));
 
-  function handleDelete (event){
+  function handleDelete (){
   fetch(`http://localhost:4000/questions/${id}`,{
-    method:"DELETE",
+    method:"DELETE"
   })
+  deletQuiz();
   // .then((res)=>res.json())
   // .then(() => console.log(question));
   }
